@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// 载入 vant 模块
+import './utils/register-vant.js'
+
 Vue.config.productionTip = false
 
 new Vue({
