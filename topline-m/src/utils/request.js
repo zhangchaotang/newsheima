@@ -2,18 +2,20 @@
 /**
  * 封装 axios 请求模块
  */
-import axios from "axios"
+
+import axios from 'axios'
+import jsonBig from 'json-bigint'
 
 // axios.create 方法：复制一个 axios
 const request = axios.create({
-  baseURL: "http://ttapi.research.itcast.cn/" // 基础路径
+  baseURL: 'http://ttapi.research.itcast.cn/' // 基础路径
 })
 
 // 请求拦截器
 request.interceptors.request.use(
   function (config) {
     // 在这里设置请求头
-    config.headers.Authorization = sessionStorage.getItem('token')
+    // config.headers.Authorization = sessionStorage.getItem('token')
     return config
   },
   function (error) {
@@ -32,7 +34,7 @@ request.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
 )
 
@@ -46,7 +48,3 @@ request.defaults.transformResponse = [function (data) {
 }]
 
 export default request
-
-
-
-
