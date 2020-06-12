@@ -5,6 +5,7 @@
 
 import axios from 'axios'
 import jsonBig from 'json-bigint'
+import store from '../store/index'
 
 // axios.create 方法：复制一个 axios
 const request = axios.create({
@@ -15,7 +16,12 @@ const request = axios.create({
 request.interceptors.request.use(
   function (config) {
     // 在这里设置请求头
-    // config.headers.Authorization = sessionStorage.getItem('token')
+    const token = store.state.useData
+    if (token) {
+      // 注意：后端要求 Bearer 后面有个空格，多了少了都不行
+      // Authorization 也是后端要求的名字，不能乱写
+      config.headers.Authorization = `Bearer ${token}`
+    }
     return config
   },
   function (error) {
